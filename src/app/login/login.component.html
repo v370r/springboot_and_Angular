@@ -1,4 +1,8 @@
-User Name = :  <input type = "text" name = "username" value ="{{username}}">
-Password  = :  <input type = "password" name = "password" value = "{{password}}"> 
+<small *ngIf='invalidLogIn'>{{errorMessage}}</small>
+<div>
 
-<button (click)= handleLogIn()>Log in </button>
+  User Name = :  <input type = "text" name = "username" [(ngModel)] ="username">
+  Password  = :  <input type = "password" name = "password" [(ngModel)] ="password">  
+  <!--Username = {{username}}; To check binding-->
+  <button (click)= handleLogIn()>Log in </button>
+</div>
