@@ -1,11 +1,15 @@
-<table border = "1">
+
+<h1>My Todo's</h1>
+
+<div class = "container">
+<table class ="table">
   <caption>My Todo's</caption>
   <thead>
     <tr>
       <th>Id</th>
       <th>Description</th>
-      <th>Done</th>
       <th>Target Date</th>
+      <th>Task</th>
       <th>is Completed</th>
     </tr>
   </thead>
@@ -13,10 +17,12 @@
     <tr *ngFor = "let itodo of todos">
       <td>{{itodo.id}}</td>
       <td>{{itodo.description}}</td>
-      <td>{{itodo.done}}</td>
       <td>{{itodo.targetDate | date | uppercase}}</td> 
       <td>{{itodo.description}}</td>
+      <td>{{itodo.done}}</td>
     </tr>
 
   </tbody>
+
 </table>
+</div>
