@@ -20,7 +20,7 @@ export class LoginComponent implements OnInit {
 
 
 
-  constructor(private router: Router,private hardCodedAutentication:HardcodedAutenticationService) { }
+  constructor(private router: Router,public hardCodedAutentication:HardcodedAutenticationService) { }
 
   ngOnInit() {
   }
