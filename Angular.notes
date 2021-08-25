@@ -1,0 +1,111 @@
+-=Angular =-
+Commands:
+    [ng commands]
+        ng new <Filename>
+        ng serve (must be inside the folder)
+        ng lint (checks for violations)
+        ng build (creates a dist folder ;makes it easy to deploy applications on other environment)
+        ng test (rubs unit test for angular applications,framework :jasmine ,we use karma to run unit test)
+        ng e2e (end to end test)
+        ng generate component <name of component> --spec false (doesnt create spec file used for unit testing)
+        ng generate component <name of component> (creates a component inside app)
+        ng generate service  (it generates service common across the applications) (better not to use it since it creates inside root)
+        ng generate service service/hardCodedAutentication
+        ng generate service service/routeGuard
+
+
+
+    [end]
+Types of event:
+     [html]
+        {{loadState}}
+        <button type="submit" (click)="OnSwitchState()">loadState</button>
+
+        <p [textContent]="loadState"></p>
+
+        <div>
+        <input type="text"(input)="loadState = $event.target.value"> not a two way biding its listening
+        <input type="text" [(ngModel)]="loadState">
+    [end]
+
+Components:
+1.Menu Component
+2.List todo Component
+3.Footer Component
+
+   Component
+1.Template                          2. style                     3.code
+html.component.html                css,css component              Typescript,component.ts 
+
+Special Imports:
+    import { HttpClient } from '@angular/common/http';
+
+Commands:
+    - <a routerLink = "/todos">here</a>
+    - *(*ngFor  of   *ngIf)* no need to import unlike ngModel for forms module its inside Browser module
+    - RouteGuardService implements CanActivate{}(Have multiple imports but use Angular/routers)
+    - to route use *this.router.navigate(["<name>"])* 
+    - USE `http://localhost:8080/users/${username}/todos`,username `this to add variables instead so strinf
+
+Facts:
+- In java we use packages to organize classes =javascript all classes in single file are part of module and export when want to use outside
+- Getting the value using "{{}}" is called interpolation
+- If we use value it wont be updated  in components we have to use n[(ngModel)] also called as banana in a box model.ng model will do binding for us on both the sides
+- To handle event click we have to use handleLogin() which should be imported explicitely in app modules {FormsModule} and added to imports 
+- 3kinds of data binding:
+    -1. Interpolation:
+            Tieing component property with view element
+    -2. Component event binding:
+            We tie a userevent a click of a button to event which is defined
+    -3. Two way data binding:
+            Two way databinding where binding is implemented using ngModel
+- When we want to inject dependency we delcare it and inject it inside constructor
+- when we pass something as constructor argument it is by default available as member variable.No need to write this.router =router.
+- Dont keep app routing ** above itsregex and match anything
+- | called as pipes just like using grep in commandline
+- for best practices dont use hrefs use routers hrefs does reload everything for interapplications inside angular use routing
+- to import a service method into other tyypescript files we have to import inside constructor
+
+- SessionStorageObject:
+    similar to local storage limited to browser session
+    If u use 
+        *ngIf isUserLoggedIn  in html it wont take it and we have to refresh the page to reflect the changes  for this we have to directly use this.HardCodedAutenticationService.isUserLoggedIn()
+        because ngInit happens only when we refresh !
+- To make the unaunticated users not use links to open todos we have to improve securit by using RouteGuardService and implement CanActivate
+- services wil take 3-5 sec to execute if they work synchronessly entire browser will hang so we have to call they asynchronessly
+- Observables are one of the methods to apply  asynchronessly(declarative)
+
+- Spring boot by default blocks url from different server use @CrossOrigin
+    Access to XMLHttpRequest at 'http://localhost:8080/hello-world-bean' from origin 'http://localhost:4200' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' heade
+Use event binding (ngModelChange)="
+- targetDate|date wont work bcz it need specific format split ngmodel into two things
+    1. property binding
+    2. event binding
+
+- *Subscribe*
+    when data is called it returns observable to get the data we need Subscribe
+    since subscribe is asynchronous it throws error when the service  is slow to tackle it we have to place a dummy variable this.todo = new Todo(1,"",false,new Date())
+
+Course 2:
+      -main.ts is used to start the app
+      - if we wanna make sure we can listen to from outside of the component we have to add decorator
+    Insstalling using npm:
+        npm install bootstrap --save
+        npm install lodash --save  (java script)
+
+- Controlling CSS class with ngClass
+    ngModel dont have * bcz it dont need to change the structure of dome where as *ngIf or *ngFor need to change the dome.
+    angular team  gave the  shortcut
+        name of property we bind same asthe directive
+      ngClass [ngClassConfig] = " "
+      really powerful bcz of property binding
+
+Course Project:
+    If we implement onsite choosen logic (fetch chars) into service  the new instances it ignorse the changes in some other instances changes in item component
+    dont make into service .so creating own instance is bad so angular offers dependency injection
+- dependency injection inject into constructor 
+        swservice: StarwarService
+
+        constructor(swService:starWarService){
+            this.swservice = swservice
+        }
